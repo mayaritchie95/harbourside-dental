@@ -104,6 +104,7 @@
   .reviews-inline:hover u{text-decoration-color:var(--blue)}
   .harbour-band{width:100%;line-height:0;margin:0}
   .harbour-band svg{width:100%;height:clamp(150px,20vw,240px);display:block}
+  @media (max-width:900px){.harbour-band svg{height:clamp(132px,32vw,200px)}}
   @keyframes sweep{0%{transform:rotate(-20deg)}50%{transform:rotate(16deg)}100%{transform:rotate(-20deg)}}
   .beam{transform-origin:1188px 80px;animation:sweep 10s ease-in-out infinite}
   @media (prefers-reduced-motion: reduce){.beam{animation:none;opacity:.5}}
@@ -1541,6 +1542,18 @@
     var body='Name: '+name+'\n'+'Email: '+email+'\n'+'Phone: '+phone+'\n\n'+'Message:\n'+message+'\n';
     window.location.href='mailto:info@myharboursidedental.ca?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
   }
+</script>
+<script>
+(function(){
+  var svg=document.querySelector('.harbour-band svg');
+  if(!svg)return;
+  function fit(){
+    svg.setAttribute('preserveAspectRatio', window.innerWidth<=900 ? 'xMaxYMid slice' : 'xMidYMid slice');
+  }
+  fit();
+  window.addEventListener('resize',fit,{passive:true});
+  window.addEventListener('orientationchange',fit);
+})();
 </script>
 </body>
 </html>
